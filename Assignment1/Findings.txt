@@ -1,0 +1,76 @@
+Initially starting out with the two functions, FibonacciBad and FibonacciGood as found in the textbook, I created those two functions first.
+From there I then began from the top while keeping those two functions in mind. First, beginning by creating a base class called Fibonacci.
+The Fibonacci class will house all the child functions (including the good and bad algorithms) related to this problem.
+
+I had started out with one main function, Fibonacci.Run() which would run the text writer, and then begin with some try catch logic.
+The catch was for errors, but I also had a RunTimeException to handle any hanging processes. My first try running the two algorithms, in their respective
+original state, resulted in the fast finishing instantly and the slow... well the slow I had let run for over an hour before I noticed it was not even coming close to finishing.
+
+Because of this,the catch RunTime exception was added. On top of that I also added a global timeout flag on the Fibonacci class and broke up the main function Fibonacci.Run() into a few
+different functions such as:
+
+analysisOutput() : The main function that the user calls. This function accepts one parameter, an integer and will match to the fast or the slow function (0 or 1).
+This also assigns the variable function name. This name is used in printing the table for analysis in out.txt.
+
+functionTimeoutWrapper() : A wrapper for the writer, to allow for easier reading and debugging. Also handles all of the timeout logic and outputs. Added a system print to print the timeout message for my own use case
+to see the output in the terminal.
+
+fibonacciExecute(): An execution function/wrapper that handles the case and selects the appropriate algorithm. Also between executions, check for a timeout and raise a RunTimeException.
+Once raised, the output will print Timeout, instead of waiting for the remaining calculations to finish.
+
+The base timeout, is set to 30 seconds but it can be modified. I set it to 30 seconds in order to speed up my testing and developing. A better timeout would probably
+be closer to a minute.
+
+Some extra styling and readability was added by adding a seconds field along with the nano second time. Just to make the numbers a little more human to read.
+To reduce redundancy, I opted to create one function, that accepts the 0 or 1 parameter and will handle the logic for each algorithm accordingly.
+
+Improvements and changes:
+Some potential improvements, as with any programs, can be noted. The main one specifically, is that the timeout function is a little too lax for my liking.
+When I run the function with the timeout, it does not HARD stop at the limit. Instead, it finishes the interval, which is around 35 seconds, and the remaining are to be timeout
+as they are going to be even slower.
+
+There is a way to make the function a hard stop, but it would require editing the original two functions (FibonacciBad, FibonacciGood). It could be done using Java's Thread logic but requires some
+significant rewriting of the Fibonaccibad function and the funnctionTimeoutWrapper and fibonacci execute as well. As I didn't know if editing the original functions was allowed, I opted
+to not do this.
+
+b) FibonacciBad: Recursive calls result in a very slow function. For each call, it calls both FibonacciBad(n-1) and FibonacciBad(n-2).
+This grows as the function grows, where each call creates two more calls, grows exponentially as n increases and thus creates the bottleneck in question.
+The time complexity of this call, is 0(2^n).
+
+FibonacciGood: This function avoids the redundant calculation, by returning both (n-1) and (n-2) at once. Since both are returned at once,
+they are calculated in constant time, which speeds up the algorithm. Each recursive call only creates one new call, instead of
+two, so the call number is proportional to n. The time complexity is O(n).
+
+c) No, neither of these two functions implement any tail recursion. Fibonaccibad, the last recursive calls are not the last call of the function.
+FibonacciGood, similar to the bad, it does not have the recursive call as the final function call.
+
+Psuedocode:
+    function FibonacciTail(n, a, b):
+        if n == 0:
+            return a
+        if n == 1:
+            return b
+        return FibonacciTail(n - 1, b, a + b)
+
+In implementing this, I will create a new type parameter, 2, which will implement the tail recursion.
+I then commented out the fast and slow function, and ran the tail function on its own, outputting to it's own file
+called "out_tail.txt".
+
+I implemented the tail function similar to the pseudocode for grading purposes. If we wanted to clean up this code,
+we can remove the redundancies, such as the 0 and 1, as we start at 5.
+
+   function FibonacciTail(n):
+        if n == 5:
+            return n
+        return FibonacciTail(n - 1)
+
+This would be the cleaner approach, but I opted to do it the same as the pseudo code as it demonstrates tail recursion
+and the 0, 1, cases better.
+
+
+
+
+
+
+
+

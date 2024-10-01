@@ -1,0 +1,27 @@
+
+
+ Fibonacci Tail Recursive Analysis
+
+Fibonacci(n)   Recursive Time (ns) Recursive Time (sec)          
+------------------------------------------------------------
+Fibonacci(5)   1667                0.000001667                   
+Fibonacci(10)  11293042            0.011293042                   
+Fibonacci(15)  11403375            0.011403375                   
+Fibonacci(20)  11468000            0.011468000                   
+Fibonacci(25)  11530250            0.011530250                   
+Fibonacci(30)  11592083            0.011592083                   
+Fibonacci(35)  11653917            0.011653917                   
+Fibonacci(40)  11714583            0.011714583                   
+Fibonacci(45)  11792875            0.011792875                   
+Fibonacci(50)  11867042            0.011867042                   
+Fibonacci(55)  11951833            0.011951833                   
+Fibonacci(60)  12031000            0.012031000                   
+Fibonacci(65)  12095417            0.012095417                   
+Fibonacci(70)  12153833            0.012153833                   
+Fibonacci(75)  12219042            0.012219042                   
+Fibonacci(80)  12284625            0.012284625                   
+Fibonacci(85)  12346208            0.012346208                   
+Fibonacci(90)  12406125            0.012406125                   
+Fibonacci(95)  12465125            0.012465125                   
+Fibonacci(100) 12528250            0.012528250                   
+

@@ -1,0 +1,54 @@
+
+
+ Fibonacci Fast Analysis
+
+Fibonacci(n)   Recursive Time (ns) Recursive Time (sec)          
+------------------------------------------------------------
+Fibonacci(5)   2000                0.000002000                   
+Fibonacci(10)  10627125            0.010627125                   
+Fibonacci(15)  10750667            0.010750667                   
+Fibonacci(20)  10821917            0.010821917                   
+Fibonacci(25)  10892333            0.010892333                   
+Fibonacci(30)  10959250            0.010959250                   
+Fibonacci(35)  11025417            0.011025417                   
+Fibonacci(40)  11163083            0.011163083                   
+Fibonacci(45)  11259958            0.011259958                   
+Fibonacci(50)  11334417            0.011334417                   
+Fibonacci(55)  11410625            0.011410625                   
+Fibonacci(60)  11563042            0.011563042                   
+Fibonacci(65)  11638375            0.011638375                   
+Fibonacci(70)  11702292            0.011702292                   
+Fibonacci(75)  11770875            0.011770875                   
+Fibonacci(80)  11840625            0.011840625                   
+Fibonacci(85)  11904625            0.011904625                   
+Fibonacci(90)  11968958            0.011968958                   
+Fibonacci(95)  12033667            0.012033667                   
+Fibonacci(100) 12098708            0.012098708                   
+
+
+
+ Fibonacci Slow Analysis
+
+Fibonacci(n)   Recursive Time (ns) Recursive Time (sec)          
+------------------------------------------------------------
+Fibonacci(5)   1916                0.000001916                   
+Fibonacci(10)  67291               0.000067291                   
+Fibonacci(15)  203291              0.000203291                   
+Fibonacci(20)  365000              0.000365000                   
+Fibonacci(25)  941208              0.000941208                   
+Fibonacci(30)  3560458             0.003560458                   
+Fibonacci(35)  30657500            0.030657500                   
+Fibonacci(40)  329935916           0.329935916                   
+Fibonacci(45)  3498412083          3.498412083                   
+Fibonacci(50)  38496481250         38.496481250                  
+Fibonacci(55)  Timeout             Timeout                       
+Fibonacci(60)  Timeout             Timeout                       
+Fibonacci(65)  Timeout             Timeout                       
+Fibonacci(70)  Timeout             Timeout                       
+Fibonacci(75)  Timeout             Timeout                       
+Fibonacci(80)  Timeout             Timeout                       
+Fibonacci(85)  Timeout             Timeout                       
+Fibonacci(90)  Timeout             Timeout                       
+Fibonacci(95)  Timeout             Timeout                       
+Fibonacci(100) Timeout             Timeout                       
+
