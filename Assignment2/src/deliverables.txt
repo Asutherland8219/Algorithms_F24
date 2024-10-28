@@ -1,0 +1,151 @@
+Assignment 2 Deliverables
+
+1. PseudoCode for Calculator
+
+Main Functions :
+    start : main () {
+        try {
+            read the test case file
+            create the writer for the results
+
+            while (read each line until null) {
+                result = evaluateExpression
+                Print(function % results in the following % , line, result)
+            }
+        }
+        catch ( File not found) {
+            print(file not found)
+        }
+        catch (Ioexception) {
+            print(trace)
+        }
+    }
+
+    step 1: evaluateExpression(String expression) {
+        if it is empty, return null or empty;
+        while the expression contains parentheses {
+            find the match.
+            run evaluateSimpleExpression(subexpression) ; evaluate based on the expression inside the bracket. This is for nested bracket functions
+        }
+        # this will either evaluate a normal expression, or work out what is left after a parentheses expression is handled.
+        return evaluateSimpleExpression(expression)
+    }
+
+    step 2: evalulateSimpleExpression(String expression) {
+        check if empty. if empty raise exception.
+
+        init operandarray = Stackarray(size = 10)
+        init operatorarray = Stackarray(size = 10)
+
+        #boolean check to see if output should be true or false ; used on comparison operators
+        booleanCheck = false
+
+        # used to validate valid functions including operators and operands
+        hasValidTokens = false;
+
+        # for building multi digit numbers
+        StringBuilder = number
+
+        # for detecting negative values
+        boolean lastWasOperator = true
+
+        for ( value in the length of the expression ) {
+            token = character[i]
+
+            # check for whitespace, indicating it is valid but is just a space so we can continue to the next element
+            if isWhiteSpace() {
+                continue
+            }
+
+            # check if it is a valid digit, if it is append to string builder
+            if isNumber() {
+                number.append(token)
+                lastwasOperator = false
+                hasValidTokens = true
+            }
+
+            # check if negative number
+            if token == '-' and lastWasOperator {
+                number.append(token)
+            }
+
+            if token is an operator (+, -, *, /, ^):
+                Push accumulated number to operandStack
+                WHILE operatorStack not empty AND current operator precedence >= top operator precedence:
+                    Process top operator
+                Push current operator to operatorStack
+
+            if token is a comparison operator (==, !=, >, <, >=, <=):
+                Handle similarly to regular operators
+                Set boolean check flag
+
+                Process any remaining operators
+
+            Return final result as string (or "true"/"false" for boolean operations)
+        }
+    }
+
+    Helper functions:
+
+    Function processOperator(operandStack, operatorStack):
+        IF operandStack.size < 2:
+            THROW IllegalStateException("Not enough operands")
+
+        operator = operatorStack.pop()
+        num2 = operandStack.pop()
+        num1 = operandStack.pop()
+        result = calculateResult(operator, num1, num2)
+        operandStack.push(result)
+
+    # maps the precedence to evaluate by
+    Function precedence(operator):
+        SWITCH operator:
+            CASE '^': RETURN 1    // Highest
+            CASE '*', '/': RETURN 2
+            CASE '+', '-': RETURN 3
+            CASE '>', '<', '=', '!', 'g', 'l': RETURN 4  // Lowest
+            DEFAULT: RETURN 5
+
+2. Time Complexity of Calculator
+
+1. MAIN
+    Time Complexity: O(n * m)
+    where:
+    - n is number of lines in file
+    - m is average length of each expression
+
+    Each line must be evaluated separately
+
+2. EVALUATE_EXPRESSION
+Time Complexity: O(p * m)
+where:
+- p is number of pairs of parentheses
+- m is length of expression
+
+3. EVALUATE_SIMPLE_EXPRESSION
+Time Complexity: O(m)
+where m is length of expression
+
+4. PROCESS_OPERATOR
+Time Complexity: O(1)
+Because:
+- All operations (pop, arithmetic, push) are constant time
+
+5. OVERALL COMPLEXITY
+Worst Case: O(n * p * m)
+where:
+- n is number of expressions
+- p is maximum number of nested parentheses
+- m is length of longest expression
+
+The time complexity in Big O notation would be quadratic O(n^2) because we have two major loops:
+1. The parentheses processing loop
+2. The expression evaluation loop (looping over each character)
+
+
+Space Complexity:
+O(m) where m is expression length
+Because:
+- Two stacks used (operands and operators)
+- StringBuilder for number construction
+- Temporary strings for parentheses processing

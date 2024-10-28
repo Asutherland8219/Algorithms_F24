@@ -35,7 +35,7 @@ public class Fibonacci {
         for (int n = 5; n <= 100; n += 5) {
             // Timeout Control
             try {
-                fibonacciExecute(n, startRecursive, timeoutThreshold, type, writer);
+                long fib_value = fibonacciExecute(n, startRecursive, timeoutThreshold, type, writer);
             } catch (RuntimeException e) {
 //                System.out.println(e.getMessage());
                 timeout = true;
@@ -56,7 +56,7 @@ public class Fibonacci {
         writer.write("\n");
     }
 
-    public void fibonacciExecute(int n, long startTime, long timeoutThreshold, int type, FileWriter writer) {
+    public long fibonacciExecute(int n, long startTime, long timeoutThreshold, int type, FileWriter writer) {
         long currentTime = System.nanoTime();
 
         if (currentTime - startTime >= timeoutThreshold) {
@@ -70,6 +70,7 @@ public class Fibonacci {
         } else if (type == 2) {
             fibonacciTail(n, 0, 1); // Tail-recursive Fibonacci version
         }
+        return currentTime;
     }
 
     public long fibonacciBad(int n) {
