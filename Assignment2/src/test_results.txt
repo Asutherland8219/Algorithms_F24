@@ -15,9 +15,9 @@ The function entered 2 + 0 results in the following: 2
 The function entered 0 + 0 results in the following: 0
 The function entered 10/0 results in the following: 0 division error
 The function entered 0^1 results in the following: 0
-The function entered 2 * 8 + 4 - 10 / 10 results in the following: 19
-The function entered 5 * 5 - 4 + 3 / 4 results in the following: 21
+The function entered (2 * 8 + 4 - 10) / 10 results in the following: 1
+The function entered (5 * 5 - 4 + 3) / 3 results in the following: 8
 The function entered (5*2) + 2^4 results in the following: 26
-The function entered (2^2)*10 != 20 results in the following: false
-The function entered (2^2)*10 == 40 results in the following: false
+The function entered ((2^2)*10)!= 20 results in the following: true
+The function entered ((2^2)*10) == 40 results in the following: true
 The function entered (2 * 8) + 4/2 + (6^2 * (120/10)) results in the following: 450
