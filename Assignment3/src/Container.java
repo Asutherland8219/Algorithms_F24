@@ -4,6 +4,8 @@
  * @param <V> value
  */
 public class Container<K extends Comparable<K>, V> {
+    // Comparable ensures that K must be comparable to itself, all keys must be of same type when comparing
+    // ex. You cant have one container with key of string, compared to another container of key of int
     private K key;
     private V value;
 
@@ -51,6 +53,7 @@ public class Container<K extends Comparable<K>, V> {
      * @return string in format "key: value"
      */
     @Override
+    // Override because we are using our own custom to string function
     public String toString() {
         return key + ": " + value;
     }

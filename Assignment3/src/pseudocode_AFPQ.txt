@@ -1,0 +1,144 @@
+CLASS Container<K extends Comparable<K>, V>
+    PRIVATE K key
+    PRIVATE V value
+
+    CONSTRUCTOR(key, value)
+        this.key = key
+        this.value = value
+
+    METHODS:
+        getKey() : return key
+        getValue() : return value
+        setKey(K key) : this.key = key
+        setValue(V value) : this.value = value
+
+CLASS AFPQ<K extends Comparable<K>, V>
+    PRIVATE Container<K,V>[] heap   // Extendable array of Containers
+    PRIVATE int size                // Current number of elements
+    PRIVATE boolean isMinHeap       // true for min-heap, false for max-heap
+    PRIVATE DEFAULT_CAPACITY = 10   // Initial array size
+
+    CONSTRUCTOR(boolean isMinHeap)
+        heap = new Container[DEFAULT_CAPACITY]
+        size = 0
+        this.isMinHeap = isMinHeap
+
+    PRIVATE HELPER METHODS:
+        compare(K k1, K k2):
+            comp = k1.compareTo(k2)
+            return isMinHeap ? comp < 0 : comp > 0
+
+        parent(index):
+            return (index - 1) / 2
+
+        leftChild(index):
+            return 2 * index + 1
+
+        rightChild(index):
+            return 2 * index + 2
+
+        swap(i, j):
+            temp = heap[i]
+            heap[i] = heap[j]
+            heap[j] = temp
+
+        resize():
+            newHeap = new Container[heap.length * 2]
+            copy heap to newHeap
+            heap = newHeap
+
+        upHeap(index):
+            WHILE index > 0
+                p = parent(index)
+                IF compare(heap[index].key, heap[p].key)
+                    swap(index, p)
+                    index = p
+                ELSE
+                    break
+
+        downHeap(index):
+            WHILE true
+                left = leftChild(index)
+                right = rightChild(index)
+                smallest = index
+
+                IF left < size AND compare(heap[left].key, heap[smallest].key)
+                    smallest = left
+                IF right < size AND compare(heap[right].key, heap[smallest].key)
+                    smallest = right
+
+                IF smallest != index
+                    swap(index, smallest)
+                    index = smallest
+                ELSE
+                    break
+
+        findContainer(Container c):
+            FOR i = 0 to size-1
+                IF heap[i] equals c
+                    return i
+            throw Exception("Container not found")
+
+    PUBLIC METHODS:
+        insert(K key, V value):
+            IF size equals heap.length
+                resize()
+            container = new Container(key, value)
+            heap[size] = container
+            upHeap(size)
+            size++
+            return container
+
+        removeTop():
+            IF isEmpty()
+                throw Exception
+            top = heap[0]
+            heap[0] = heap[size-1]
+            heap[size-1] = null
+            size--
+            IF NOT isEmpty()
+                downHeap(0)
+            return top
+
+        top():
+            IF isEmpty()
+                throw Exception
+            return heap[0]
+
+        remove(Container c):
+            index = findContainer(c)
+            result = heap[index]
+            heap[index] = heap[size-1]
+            heap[size-1] = null
+            size--
+            IF index < size
+                upHeap(index)
+                downHeap(index)
+            return result
+
+        replaceKey(Container c, K key):
+            oldKey = c.key
+            index = findContainer(c)
+            c.setKey(key)
+            upHeap(index)
+            downHeap(index)
+            return oldKey
+
+        replaceValue(Container c, V value):
+            oldValue = c.value
+            c.setValue(value)
+            return oldValue
+
+        toggle():
+            isMinHeap = NOT isMinHeap
+            FOR i = (size/2)-1 down to 0
+                downHeap(i)
+
+        state():
+            return isMinHeap
+
+        isEmpty():
+            return size equals 0
+
+        size():
+            return size

@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 /**
- * Adaptable and Flexible Priority Queue (AFPQ) implementation using a heap.
+ * Adaptable and Flexible Priority Queue (AFPQ) using a heap.
  * Designed to function as either a min-heap or max-heap.
  * @param <K> Key type, must be Comparable
  * @param <V> Value type
@@ -53,14 +53,17 @@ public class AFPQ<K extends Comparable<K>, V> {
     }
 
     private int parent(int index) {
+        // a reversal of the child calculations
         return (index - 1) / 2;
     }
 
     private int leftChild(int index) {
+        // 2n+1 finds the left child
         return 2 * index + 1;
     }
 
     private int rightChild(int index) {
+        // right child is next position after left so 2n+2
         return 2 * index + 2;
     }
 
@@ -85,9 +88,11 @@ public class AFPQ<K extends Comparable<K>, V> {
      * @param index
      */
     private void upHeap(int index) {
-
+        // move node up the heap to maintain heap property
         while (index > 0) {
             int p = parent(index);
+            // For min-heap: swap if child < parent
+            // For max-heap: swap if child > parent
             if (compare(heap[index].getKey(), heap[p].getKey())) {
                 swap(index, p);
                 index = p;
@@ -103,13 +108,15 @@ public class AFPQ<K extends Comparable<K>, V> {
             int right = rightChild(index);
             int smallest = index;
 
+            // check if left should be the smallest
             if (left < size && compare(heap[left].getKey(), heap[smallest].getKey())) {
                 smallest = left;
             }
+            // check if the right should be the smallest
             if (right < size && compare(heap[right].getKey(), heap[smallest].getKey())) {
                 smallest = right;
             }
-
+            // if not the smallest, swap
             if (smallest != index) {
                 swap(index, smallest);
                 index = smallest;
@@ -148,7 +155,9 @@ public class AFPQ<K extends Comparable<K>, V> {
         if (isEmpty()) throw new NoSuchElementException("Priority queue is empty");
 
         Container<K, V> top = heap[0];
+        // move last element to the root
         heap[0] = heap[size - 1];
+        // decrease size
         heap[size - 1] = null;
         size--;
 
@@ -172,11 +181,12 @@ public class AFPQ<K extends Comparable<K>, V> {
     public Container<K, V> remove(Container<K, V> c) {
         int index = findContainer(c);
         Container<K, V> result = heap[index];
-
+        // replace removed with last element
         heap[index] = heap[size - 1];
+        // clear and reszie
         heap[size - 1] = null;
         size--;
-
+        // find the correct position for the new element
         if (index < size) {
             upHeap(index);
             downHeap(index);
@@ -213,7 +223,7 @@ public class AFPQ<K extends Comparable<K>, V> {
      */
     public void toggle() {
         isMinHeap = !isMinHeap;
-        // Rebuild heap to maintain heap property
+        // Rebuild heap from bottom up to maintain heap property
         for (int i = (size / 2) - 1; i >= 0; i--) {
             downHeap(i);
         }

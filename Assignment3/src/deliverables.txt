@@ -1,0 +1,25 @@
+TimeComplexity for functions
+
+1. toggle()
+    - must rebuild entire heap
+    - each downheap call is O(logn)
+    - number of nodes needing downheap is n/2
+    - Total is O(n/2*logn) which is O(log n)
+    - But because we use bottom up approach, it reduces to O(n)
+    - This is because lower levels need less comparisons
+
+2. remove(Container e)
+    - findContainer is O(n) as it searches the array
+    - upheap and downheap are both O(log n)
+    - Total is O(n + logn) = O(n)
+
+3. replaceKey(Container e, K k)
+    - findcontainer is O(n) as it searches array
+    - upheap/downheap is O(log n)
+    - Total is O(n + logn) = O(n)
+
+4. replaceValue(Container e, K k)
+    - No heap propery affected, only changes value not the key
+    - Operates in constant time O(1)
+
+
