@@ -23,15 +23,30 @@ public class Main {
         // Example 3: Removing top elements from min-heap
         System.out.println("Example 3: remove top from min-heap");
         AFPQ<Integer, String> heap3 = new AFPQ<>(true);
+
         heap3.insert(5, "Five");
         heap3.insert(3, "Three");
         heap3.insert(7, "Seven");
-        System.out.println("Removing elements in order:");
+
+        System.out.println("\nInitial state:");
+        System.out.println("Current top: " + heap3.top().getKey() + " -> " + heap3.top().getValue());
+        System.out.println("\nRemoving elements in order:");
+
         while (!heap3.isEmpty()) {
+            System.out.println("\nBefore removal - Top: " + heap3.top().getKey() +
+                    " -> " + heap3.top().getValue());
+
             Container<Integer, String> removed = heap3.removeTop();
             System.out.println("Removed: " + removed.getKey() + " -> " + removed.getValue());
+
+            if (!heap3.isEmpty()) {
+                System.out.println("After removal - New top: " + heap3.top().getKey() +
+                        " -> " + heap3.top().getValue());
+                System.out.println("Heap size: " + heap3.size());
+            } else {
+                System.out.println("Heap is now empty\n");
+            }
         }
-        System.out.println();
 
         // Example 4: Array resizing
         System.out.println("Example 4: array resizing test ");
